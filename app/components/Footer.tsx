@@ -1,15 +1,26 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "../../i18n/navigation";
 
-const NAV_ITEMS = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/operations", label: "Operations" },
-  { href: "/advisory", label: "Advisory" },
-  { href: "/compliance", label: "Compliance" },
-  { href: "/contact", label: "Contact" },
-];
+const NAV_KEYS = [
+  "home",
+  "about",
+  "operations",
+  "advisory",
+  "compliance",
+  "contact",
+] as const;
 
-export default function Footer() {
+const PATHS: Record<(typeof NAV_KEYS)[number], string> = {
+  home: "/",
+  about: "/about",
+  operations: "/operations",
+  advisory: "/advisory",
+  compliance: "/compliance",
+  contact: "/contact",
+};
+
+export default async function Footer() {
+  const t = await getTranslations("nav");
   const buildDate = new Date().toISOString().slice(0, 10);
   return (
     <footer className="site-footer">
@@ -34,9 +45,9 @@ export default function Footer() {
           <div className="col">
             <h4>Site</h4>
             <ul>
-              {NAV_ITEMS.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href}>{item.label}</Link>
+              {NAV_KEYS.map((key) => (
+                <li key={key}>
+                  <Link href={PATHS[key]}>{t(key)}</Link>
                 </li>
               ))}
             </ul>

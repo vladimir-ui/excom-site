@@ -1,0 +1,20 @@
+{
+  "site": {
+    "title": "ExCom — Source to Settlement",
+    "description": "ExCom Limited — Malta-incorporated trader of precious metals raw material. Trusted execution from source to settlement."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "operations": "Operations",
+    "advisory": "Advisory",
+    "compliance": "Compliance",
+    "contact": "Contact"
+  },
+  "languageSwitcher": {
+    "label": "Language",
+    "en": "EN",
+    "es": "ES",
+    "bg": "BG"
+  }
+}

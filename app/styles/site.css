@@ -267,6 +267,28 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 .theme-toggle:hover { background: var(--quiet-fill); color: var(--ink-primary); }
 
+/* language switcher — three small caps buttons (EN / ES / BG) */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 6px;
+  border: 1px solid var(--hairline-color);
+}
+.lang-link {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  padding: 4px 7px;
+  border-radius: 4px;
+  color: var(--ink-muted);
+  text-decoration: none;
+  transition: color 150ms var(--ease), background-color 150ms var(--ease);
+}
+.lang-link:hover { color: var(--ink-primary); background: var(--quiet-fill); }
+.lang-link.active { color: var(--ink-primary); background: var(--quiet-fill); }
+
 /* mobile nav */
 .nav-toggle {
   display: none;

@@ -1,22 +1,35 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { Link, usePathname } from "../../i18n/navigation";
+import { routing } from "../../i18n/routing";
 
-const NAV_ITEMS = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/operations", label: "Operations" },
-  { href: "/advisory", label: "Advisory" },
-  { href: "/compliance", label: "Compliance" },
-  { href: "/contact", label: "Contact" },
-];
+const NAV_KEYS = [
+  "home",
+  "about",
+  "operations",
+  "advisory",
+  "compliance",
+  "contact",
+] as const;
+
+const PATHS: Record<(typeof NAV_KEYS)[number], string> = {
+  home: "/",
+  about: "/about",
+  operations: "/operations",
+  advisory: "/advisory",
+  compliance: "/compliance",
+  contact: "/contact",
+};
 
 type Theme = "light" | "dark";
 
 export default function Header() {
-  const pathname = usePathname();
+  const locale = useLocale();
+  const pathname = usePathname(); // strips the /[locale] prefix
+  const t = useTranslations("nav");
+  const tLang = useTranslations("languageSwitcher");
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState<Theme>("light");
@@ -83,26 +96,43 @@ export default function Header() {
           className={`nav${navOpen ? " open" : ""}`}
           aria-label="Primary"
         >
-          {NAV_ITEMS.map((item) => {
+          {NAV_KEYS.map((key) => {
+            const href = PATHS[key];
             const active =
-              item.href === "/"
-                ? pathname === "/"
-                : pathname?.startsWith(item.href);
+              href === "/" ? pathname === "/" : pathname?.startsWith(href);
             return (
               <Link
-                key={item.href}
-                href={item.href}
+                key={key}
+                href={href}
                 className={active ? "active" : ""}
                 aria-current={active ? "page" : undefined}
                 onClick={() => setNavOpen(false)}
               >
-                {item.label}
+                {t(key)}
               </Link>
             );
           })}
         </nav>
 
         <div className="header-utility">
+          <div
+            className="lang-switch"
+            role="group"
+            aria-label={tLang("label")}
+          >
+            {routing.locales.map((loc) => (
+              <Link
+                key={loc}
+                href={pathname}
+                locale={loc}
+                className={`lang-link${loc === locale ? " active" : ""}`}
+                aria-current={loc === locale ? "true" : undefined}
+              >
+                {tLang(loc)}
+              </Link>
+            ))}
+          </div>
+
           <button
             type="button"
             className="theme-toggle"

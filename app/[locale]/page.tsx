@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
-import GlobeBridge from "./components/Globe";
-import Dossier from "./components/Dossier";
+import GlobeBridge from "../components/Globe";
+import Dossier from "../components/Dossier";
 
 export default function HomePage() {
   return (

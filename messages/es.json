@@ -1,0 +1,20 @@
+{
+  "site": {
+    "title": "ExCom — De la Fuente a la Liquidación",
+    "description": "ExCom Limited — operador de materia prima de metales preciosos, registrado en Malta. Ejecución de confianza, desde el origen hasta la liquidación."
+  },
+  "nav": {
+    "home": "Inicio",
+    "about": "Quiénes somos",
+    "operations": "Operaciones",
+    "advisory": "Asesoría",
+    "compliance": "Cumplimiento",
+    "contact": "Contacto"
+  },
+  "languageSwitcher": {
+    "label": "Idioma",
+    "en": "EN",
+    "es": "ES",
+    "bg": "BG"
+  }
+}

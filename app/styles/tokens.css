@@ -183,6 +183,13 @@
   --fw-black:   800;
 }
 
+/* Bulgarian: Alata is Latin-only — Cyrillic display headlines fall back
+   to system sans, which breaks the brand voice. Swap the display token
+   to Roboto Slab (which has full Cyrillic coverage) when html lang=bg. */
+:root[lang="bg"] {
+  --font-display: var(--font-roboto-slab), ui-serif, Georgia, 'Times New Roman', serif;
+}
+
 /* ═══════════════════════════════════════════════════════════════════════════
    Semantic typography classes — preferred over raw tokens in markup
    ═══════════════════════════════════════════════════════════════════════════ */
