@@ -21,18 +21,18 @@ function Hero() {
     <section className="hero">
       <div className="container hero-inner">
         <div className="hero-meta-strip">
-          <span>
+          <span className="meta-item">
             <span className="live"></span>
+            Malta · C 112080
           </span>
-          <span>Malta · C 112080</span>
           <span className="dot"></span>
-          <span>
+          <span className="meta-item">
             Operating reach · Europe · USA · LATAM · UAE · India · Asia
           </span>
           <span className="dot"></span>
-          <span>LBMA-aligned</span>
+          <span className="meta-item">LBMA-aligned</span>
           <span className="dot"></span>
-          <span>Source to Settlement</span>
+          <span className="meta-item">Source to Settlement</span>
         </div>
 
         <h1 className="hero-positioning">

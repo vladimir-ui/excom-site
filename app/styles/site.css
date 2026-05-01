@@ -211,6 +211,13 @@ button { font: inherit; color: inherit; cursor: pointer; }
    force the navy/color logo immediately so it doesn't read as low-contrast white-on-cream. */
 .site-header.on-light .brand-logo-dark { display: none; }
 .site-header.on-light .brand-logo-light { display: block; }
+
+/* Dark theme: the header background is dark regardless of scroll/route,
+   so the navy/color logo reads as low-contrast. Force the white variant. */
+[data-theme="dark"] .site-header.scrolled .brand-logo-dark,
+[data-theme="dark"] .site-header.on-light .brand-logo-dark { display: block; }
+[data-theme="dark"] .site-header.scrolled .brand-logo-light,
+[data-theme="dark"] .site-header.on-light .brand-logo-light { display: none; }
 .brand .meta {
   font-family: var(--font-mono);
   font-size: 10.5px;
@@ -351,6 +358,11 @@ button { font: inherit; color: inherit; cursor: pointer; }
   color: rgba(242,239,231,0.55);
   margin-bottom: clamp(40px, 6vw, 80px);
 }
+.hero-meta-strip .meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
 .hero-meta-strip .dot {
   width: 4px; height: 4px; border-radius: 50%;
   background: rgba(242,239,231,0.35);
@@ -360,7 +372,15 @@ button { font: inherit; color: inherit; cursor: pointer; }
   background: #6EE7A6;
   box-shadow: 0 0 0 0 rgba(110,231,166,0.6);
   animation: hero-pulse 2.2s infinite;
-  margin-right: -6px;
+}
+@media (max-width: 600px) {
+  .hero-meta-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .hero-meta-strip .dot { display: none; }
+  .hero-meta-strip .meta-item { font-size: 10.5px; letter-spacing: 0.14em; }
 }
 @keyframes hero-pulse {
   0% { box-shadow: 0 0 0 0 rgba(110,231,166,0.6); }
