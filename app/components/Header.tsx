@@ -20,6 +20,7 @@ export default function Header() {
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState<Theme>("light");
+  const [navOpen, setNavOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -43,11 +44,17 @@ export default function Header() {
     }
   }, [theme]);
 
+  // close mobile menu on route change
+  useEffect(() => {
+    setNavOpen(false);
+  }, [pathname]);
+
   const toggleTheme = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
+  const toggleNav = () => setNavOpen((o) => !o);
 
   return (
     <header
-      className={`site-header${scrolled ? " scrolled" : ""}${!isHome ? " on-light" : ""}`}
+      className={`site-header${scrolled ? " scrolled" : ""}${!isHome ? " on-light" : ""}${navOpen ? " nav-open" : ""}`}
     >
       <div className="container header-inner">
         <Link className="brand" href="/" aria-label="ExCom — home">
@@ -71,7 +78,11 @@ export default function Header() {
           <span className="meta">SOURCE TO SETTLEMENT</span>
         </Link>
 
-        <nav className="nav" aria-label="Primary">
+        <nav
+          id="primary-nav"
+          className={`nav${navOpen ? " open" : ""}`}
+          aria-label="Primary"
+        >
           {NAV_ITEMS.map((item) => {
             const active =
               item.href === "/"
@@ -83,6 +94,7 @@ export default function Header() {
                 href={item.href}
                 className={active ? "active" : ""}
                 aria-current={active ? "page" : undefined}
+                onClick={() => setNavOpen(false)}
               >
                 {item.label}
               </Link>
@@ -123,6 +135,43 @@ export default function Header() {
                 strokeLinejoin="round"
               >
                 <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" />
+              </svg>
+            )}
+          </button>
+
+          <button
+            type="button"
+            className="nav-toggle"
+            aria-label={navOpen ? "Close menu" : "Open menu"}
+            aria-expanded={navOpen}
+            aria-controls="primary-nav"
+            onClick={toggleNav}
+          >
+            {navOpen ? (
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
+            ) : (
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M4 7h16M4 12h16M4 17h16" />
               </svg>
             )}
           </button>
