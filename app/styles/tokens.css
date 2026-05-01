@@ -1,0 +1,351 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   ExCom Design System — Colors & Type
+   Source: vladimir-ui/excom-trading (src/index.css Looka brand kit)
+   + ExCom brand brief (warm cream/paper surfaces, amber/gold Au semantic,
+   slate-gray Ag semantic, charcoal-navy primary dark).
+
+   Primary brand anchors (do not change):
+     #222831  — primary dark (sidebar, primary button, hero, primary text)
+     #eeeeee  — primary light (used as accent on dark surfaces)
+
+   Typography (matches production app, vladimir-ui/excom-trading):
+     Wordmark:   "Anurati Pro Outline" — SVG asset only, never as a typeface.
+     Display:    "Roboto Slab" — page titles, KPI numbers, headlines.
+                 This is the slab-serif anchor of the brand; it carries
+                 the "institutional, operator-grade" tone the brief calls for.
+     Body/UI:    "Alata" — the production app's running body face.
+                 Geometric sans, single weight (400).
+     Data:       "Roboto Slab" with tabular figures — KPI numbers, totals,
+                 emphasized P&L. For in-table data cells we use Alata with
+                 `font-variant-numeric: tabular-nums` to stay readable at
+                 14px while keeping column alignment.
+     Mono:       "Roboto Mono" — IDs, batch refs, QP codes.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Font loading — handled by next/font ──────────────────────────────────
+   Alata (display) and Roboto Slab (body/data) are loaded via next/font/local
+   from app/fonts/. Roboto Mono is loaded via next/font/google. next/font
+   sets CSS variables --font-alata, --font-roboto-slab, --font-roboto-mono
+   on <html>; the --font-display / --font-sans / --font-data / --font-mono
+   tokens below reference those.
+   ─────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── ExCom brand scale ──────────────────────────────────────────────── */
+  --excom-25:  #fafbfc;
+  --excom-50:  #eeeeee; /* brand primary light */
+  --excom-100: #e5e7ea;
+  --excom-200: #d5d8dd;
+  --excom-300: #b5bbc3;
+  --excom-400: #8d95a1;
+  --excom-500: #697382;
+  --excom-600: #4a5362;
+  --excom-700: #2f3641;
+  --excom-800: #222831; /* brand primary dark */
+  --excom-900: #181c22;
+  --excom-950: #0d1015;
+
+  /* ── Surfaces ────────────────────────────────────────────────────────
+     The brief upgrades the live app's cool #f8f9fa to a warm cream —
+     we keep both tokens so components can migrate progressively. */
+  --bg-page:      #F4F1EA; /* warm cream / paper — brief */
+  --bg-page-cool: #F8F9FA; /* legacy cool surface, current live app */
+  --bg-card:      #FFFFFF;
+  --bg-card-warm: #FBFAF6; /* off-white, paired with cream page */
+  --bg-muted:     #EEF0F4; /* hover/secondary/inline fills */
+  --bg-sidebar:   #222831; /* hero + sidebar primary dark */
+  --bg-hero-grad:
+    radial-gradient(circle at 95% 0%, rgba(232, 155, 44, 0.22) 0%, transparent 60%),
+    radial-gradient(circle at 0% 110%, rgba(148, 163, 184, 0.14) 0%, transparent 55%),
+    #1A1F2C;
+
+  /* ── Foreground / text ──────────────────────────────────────────────── */
+  --fg-primary:   #222831; /* primary ink */
+  --fg-secondary: #4A5362; /* secondary copy */
+  --fg-muted:     #64748B; /* metadata / labels */
+  --fg-warm-muted:#78716C; /* alt muted for warm surfaces */
+  --fg-inverse:   #FFFFFF;
+  --fg-on-dark:   #B0B8C4; /* sidebar idle text */
+
+  /* ── Borders ───────────────────────────────────────────────────────── */
+  --border-warm:  #E8E4DA; /* 1px warm-gray — signature card/table separator */
+  --border-cool:  #E2E5EB; /* cool variant matching current app */
+  --border-hair:  rgba(34, 40, 49, 0.08);
+  --ring:         #222831;
+
+  /* ── Material accents — Au (gold) & Ag (silver) ────────────────────
+     These are the ONLY two non-neutral colors allowed to carry meaning
+     in product UI. They identify physical metal — never used decoratively,
+     never used for status, never used on non-metal data. See
+     preview/colors-metal-semantics.html for the usage contract. */
+  --au-accent:    #D97706; /* amber-600 — Au left borders, icons, mark */
+  --au-accent-deep:#B45309; /* amber-700 — hover / pressed on Au accent */
+  --au-tint:      #FDE8B5; /* Au pill background on light */
+  --au-tint-soft: #FBF0D4; /* Au zebra / hover background */
+  --au-ink:       #7A350C; /* Au ink on tint (AA on FDE8B5) */
+  --au-on-dark:   #F5C063; /* Au accent on navy surfaces */
+
+  --ag-accent:    #64748B; /* slate-500 — Ag left borders, icons, mark */
+  --ag-accent-deep:#475569; /* slate-600 — hover / pressed on Ag accent */
+  --ag-tint:      #DDE4EE; /* Ag pill background on light */
+  --ag-tint-soft: #EEF2F7; /* Ag zebra / hover background */
+  --ag-ink:       #1F2A3C; /* Ag ink on tint */
+  --ag-on-dark:   #CBD5E1; /* Ag accent on navy surfaces */
+
+  /* ── Status semantics (see status-pills card) ──────────────────────── */
+  --positive-ink:  #16A34A;
+  --positive-tint: #DCFCE7;
+  --positive-soft: #F0FDF4;
+
+  --negative-ink:  #DC2626;
+  --negative-tint: #FEE2E2;
+  --negative-soft: #FEF2F2;
+
+  --warning-ink:   #D97706;
+  --warning-tint:  #FEF3C7;
+  --warning-soft:  #FFFBEB;
+
+  --info-ink:      #1D4ED8;
+  --info-tint:     #DBEAFE;
+  --info-soft:     #EFF6FF;
+
+  --neutral-ink:   #475569;
+  --neutral-tint:  #E2E8F0;
+  --neutral-soft:  #F1F5F9;
+
+  /* ── Radii ─────────────────────────────────────────────────────────── */
+  --radius-xs:  4px;
+  --radius-sm:  6px;
+  --radius-md:  8px;   /* primary button, inputs */
+  --radius-lg:  10px;  /* cards */
+  --radius-xl:  12px;  /* large panels */
+  --radius-2xl: 16px;  /* hero strip */
+  --radius-pill: 9999px;
+
+  /* ── Elevation — very restrained; mostly 1px borders ───────────────── */
+  --shadow-none: none;
+  --shadow-xs:   0 1px 2px rgba(34, 40, 49, 0.04);
+  --shadow-sm:   0 1px 2px rgba(34, 40, 49, 0.06), 0 1px 1px rgba(34, 40, 49, 0.03);
+  --shadow-md:   0 2px 6px rgba(34, 40, 49, 0.08), 0 1px 2px rgba(34, 40, 49, 0.04);
+  --shadow-hero: 0 8px 30px rgba(34, 40, 49, 0.25);
+
+  /* ── Spacing scale (4px base, Tailwind-aligned) ────────────────────── */
+  --space-0:  0;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ── Typography — ExCom brand assignment ────────────────────────────────
+     Per the official ExCom Brand Info: Title = Alata, Slogan/body = Roboto Slab.
+     Alata (geometric sans, single weight 400) carries titles & display.
+     Roboto Slab (slab serif, variable 100–900) carries body, slogan, KPI numbers.
+     Roboto Mono carries IDs and monospaced refs.
+     Font families resolved through next/font CSS variables. */
+  --font-display: var(--font-alata), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans:    var(--font-roboto-slab), ui-serif, Georgia, 'Times New Roman', serif;
+  --font-data:    var(--font-roboto-slab), ui-serif, Georgia, serif;
+  --font-mono:    var(--font-roboto-mono), ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Base type scale */
+  --fs-xs:   11px;  /* section labels, small uppercase */
+  --fs-sm:   12px;  /* status pills, dense meta */
+  --fs-base: 14px;  /* table rows, body */
+  --fs-md:   15px;  /* body on generous surfaces */
+  --fs-lg:   18px;  /* sub-headings */
+  --fs-xl:   20px;
+  --fs-2xl:  24px;
+  --fs-3xl:  32px;  /* page titles */
+  --fs-4xl:  40px;  /* page titles — larger variant */
+  --fs-kpi:  36px;  /* KPI number, compact card */
+  --fs-kpi-lg: 48px;/* KPI number, hero card */
+
+  --lh-tight:  1.1;
+  --lh-snug:   1.25;
+  --lh-base:   1.45;
+  --lh-loose:  1.6;
+
+  --tracking-tight: -0.02em;
+  --tracking-norm:  -0.01em;
+  --tracking-wide:  0.18em; /* section labels */
+  --tracking-xwide: 0.22em; /* hero eyebrow */
+
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semi:    600;
+  --fw-bold:    700;
+  --fw-black:   800;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Semantic typography classes — preferred over raw tokens in markup
+   ═══════════════════════════════════════════════════════════════════════════ */
+body, .t-body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  color: var(--fg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'ss01', 'cv11';
+}
+
+/* Page title — Roboto Slab, 32/40 bold, the standard page header */
+.t-page-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--lh-tight);
+  color: var(--fg-primary);
+}
+/* Italic descriptor under page titles — the ExCom voice */
+.t-page-descriptor {
+  font-size: var(--fs-base);
+  font-style: italic;
+  color: var(--fg-muted);
+  margin-top: 4px;
+}
+
+/* Display headings use Roboto Slab. h4 stays on sans for UI density. */
+.t-h1 { font-family: var(--font-display); font-size: var(--fs-4xl); font-weight: var(--fw-bold); letter-spacing: var(--tracking-tight); line-height: var(--lh-tight); }
+.t-h2 { font-family: var(--font-display); font-size: var(--fs-3xl); font-weight: var(--fw-bold); letter-spacing: var(--tracking-tight); line-height: var(--lh-tight); }
+.t-h3 { font-family: var(--font-display); font-size: var(--fs-2xl); font-weight: var(--fw-semi); letter-spacing: var(--tracking-norm); line-height: var(--lh-snug); }
+.t-h4 { font-size: var(--fs-lg); font-weight: var(--fw-semi); letter-spacing: var(--tracking-norm); line-height: var(--lh-snug); }
+
+/* Section label — small, uppercase, letter-spaced, muted */
+.t-section-label {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--fg-muted);
+}
+/* Hero eyebrow — wider tracking, 11px */
+.t-eyebrow {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-xwide);
+  color: var(--excom-300);
+}
+
+/* KPI numbers — Roboto Slab, bold, tabular. Currency symbol attached. */
+.t-kpi {
+  font-family: var(--font-data);
+  font-size: var(--fs-kpi);
+  font-weight: var(--fw-bold);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+  letter-spacing: var(--tracking-tight);
+  line-height: 1;
+  color: var(--fg-primary);
+}
+.t-kpi-lg {
+  font-family: var(--font-data);
+  font-size: var(--fs-kpi-lg);
+  font-weight: var(--fw-bold);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tracking-tight);
+  line-height: 1;
+}
+
+/* Display utility — slab serif for hero / marketing-style moments */
+.t-display {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--lh-tight);
+}
+
+/* Data cells — always tabular. Inside tables we keep the sans body face
+   for readability at 14px; only emphasized KPI-style numbers upgrade to
+   Roboto Slab via .t-kpi / .t-data-strong. */
+table, .font-data {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+.t-data, .t-data-strong {
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+  font-weight: var(--fw-semi);
+}
+.t-mono, code {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+}
+
+.t-muted  { color: var(--fg-muted); }
+.t-subtle { color: var(--fg-secondary); }
+.t-pos    { color: var(--positive-ink); }
+.t-neg    { color: var(--negative-ink); }
+.t-warn   { color: var(--warning-ink); }
+
+/* Italic descriptor utility (matches page-descriptor but standalone) */
+.t-italic-desc { font-style: italic; color: var(--fg-muted); }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Data-viz palette — for charts, heatmaps, categorical series
+   Source of truth; components reference these as `var(--viz-*)`.
+
+   Series colours are optimised for:
+     • legibility on cream (#F4F1EA) AND navy (#1A1F2C) surfaces
+     • deuteranopia & protanopia safety (tested: each pair >= 3:1 apart
+       on the CIE ΔE scale)
+     • printable mono (distinguishable at 50% grayscale)
+
+   NEVER use Au amber or Ag slate inside this palette — those colours are
+   reserved for metal identity. If a chart shows gold price, the Au
+   amber may be used as the series colour; if a chart shows anything
+   else, use the viz tokens below.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* Price direction — financial convention, color-blind safe pair. */
+  --viz-up:   #15803D; /* up / gain / buy */
+  --viz-up-soft:  #D7F5DE;
+  --viz-down: #B91C1C; /* down / loss / sell */
+  --viz-down-soft: #FBDADA;
+  --viz-flat: #94A3B8; /* unchanged */
+
+  /* Categorical — 6 hues for counterparty types, chart series, legends.
+     Ordered so adjacent slots contrast (don't re-order without retesting). */
+  --viz-cat-1: #1E4D8C; /* deep navy-blue */
+  --viz-cat-2: #7A3E2E; /* oxblood */
+  --viz-cat-3: #4F6E3D; /* forest */
+  --viz-cat-4: #8A5A14; /* bronze (warm, distinct from Au amber) */
+  --viz-cat-5: #614073; /* aubergine */
+  --viz-cat-6: #1F6B70; /* teal */
+
+  /* Sequential — low→high, good for heatmaps and density plots.
+     Interpolated in OKLCH so perceptual steps are even. */
+  --viz-seq-0: #F4F1EA; /* page cream — lightest / "none" */
+  --viz-seq-1: #E8D9B8;
+  --viz-seq-2: #D4B47A;
+  --viz-seq-3: #B88940;
+  --viz-seq-4: #8F5E1E;
+  --viz-seq-5: #4D2F08; /* darkest / "most" */
+
+  /* Diverging — negative ↔ zero ↔ positive.
+     Red-cream-green; middle matches page surface so "zero" reads as
+     "nothing". */
+  --viz-div-neg-3: #7A1A1A;
+  --viz-div-neg-2: #B94545;
+  --viz-div-neg-1: #E6A8A3;
+  --viz-div-zero:  #EFE9DA;
+  --viz-div-pos-1: #A8CFAE;
+  --viz-div-pos-2: #4F8B53;
+  --viz-div-pos-3: #1F5220;
+
+  /* Gridlines / axes / tooltips — neutral, match cream surface */
+  --viz-grid:     rgba(34, 40, 49, 0.06);
+  --viz-grid-strong: rgba(34, 40, 49, 0.14);
+  --viz-axis:     #78716C;
+  --viz-label:    #475569;
+}
