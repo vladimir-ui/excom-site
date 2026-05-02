@@ -72,9 +72,20 @@
     "phaseSettlementMetaKey": "Pricing",
     "phaseSettlementMetaValue": "Fix · spot · OCO · stop · limit",
 
-    "dossierEyebrow": "Operations dossier",
-    "dossierH2": "Lots processed, throughput, fix-window timing.",
-    "dossierEditorial": "A single panel summarising the 2026 year-to-date operating record. Tabular figures throughout. References LBMA AM/PM fix conventions for window timing.",
+    "disclosureEyebrow": "Operating record",
+    "disclosureH2": "Position-keeping disclosed under NDA.",
+    "disclosureLede": "ExCom does not publish lot-level operating figures on this surface. Counterparties receive the operating record through the channels below — structured for due-diligence cycles, calibrated to audit standard.",
+    "disclosureCard1Eyebrow": "01 · What's measured",
+    "disclosureCard1Heading": "Per-lot, on the platform",
+    "disclosureCard1Body": "Lots processed, gross weight Au and Ag, average fineness, return percentage, wheels-up to fix timing, vault-in and settlement SLA. Captured at lot level on the ExCom Trading Platform; reconciled against producer, refinery, and insurer documentation.",
+    "disclosureCard2Eyebrow": "02 · How it's verified",
+    "disclosureCard2Heading": "Annually, by KPMG Malta",
+    "disclosureCard2Body": "Annual financial statements audited by KPMG Malta. Operational and compliance audits commissioned independently. Findings reported to the board and made available to qualified counterparties under NDA.",
+    "disclosureCard3Eyebrow": "03 · How to access",
+    "disclosureCard3Heading": "Counterparty pack, under NDA",
+    "disclosureCard3Body": "Quarterly operating record, audited financials, and lot-level fineness and return distributions are disclosed in the Counterparty Pack — issued under NDA during onboarding. Operating jurisdictions and active counterparty network disclosed in the same channel.",
+    "disclosureCtaLabel": "Request counterparty pack →",
+    "disclosureFooter": "Operating record retained on the ExCom Trading Platform · audited annually · disclosed under NDA",
 
     "complianceEyebrow": "Compliance posture",
     "complianceH2": "Posture, not posture-taking.",
@@ -92,5 +103,24 @@
     "voiceEyebrow": "Voice",
     "voiceLead": "ExCom does not market itself to retail audiences. The entity speaks to refineries, producers, banks, hedging counterparties, and auditors.",
     "voiceEm": "Doré ultimately becomes bullion — the chain's end-state is acknowledged, not pursued."
+  },
+  "contact": {
+    "packEyebrow": "Counterparty pack",
+    "packH2": "Pack request",
+    "packLede": "Submit the form below to begin counterparty onboarding. NDA execution is required before the Counterparty Pack is released. info@ex-com.org remains available as a fallback channel.",
+    "packFieldName": "Name",
+    "packFieldEntity": "Entity",
+    "packFieldRole": "Role",
+    "packFieldJurisdiction": "Jurisdiction",
+    "packFieldType": "Counterparty type",
+    "packFieldEmail": "Email",
+    "packTypeProducer": "Producer",
+    "packTypeRefinery": "Refinery",
+    "packTypeBank": "Bank",
+    "packTypeHedging": "Hedging",
+    "packTypeOther": "Other",
+    "packNdaCheck": "I confirm that an NDA will be executed before the Counterparty Pack is released.",
+    "packSubmit": "Open request →",
+    "packNote": "Opens your mail client. NDA execution gates pack release."
   }
 }

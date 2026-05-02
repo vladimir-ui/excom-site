@@ -1,6 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import type { Metadata } from "next";
+import { useTranslations } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 import ContactForm from "./ContactForm";
+import CounterpartyPackForm from "./CounterpartyPackForm";
 
 export const metadata: Metadata = {
   title: "Contact — ExCom",
@@ -8,7 +11,18 @@ export const metadata: Metadata = {
     "Counterparty enquiries, compliance documentation requests, and press contact for ExCom Limited.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  return <ContactPageInner />;
+}
+
+function ContactPageInner() {
+  const t = useTranslations("contact");
   return (
     <main>
       <section className="page-hero">
@@ -80,6 +94,23 @@ export default function ContactPage() {
                 </dl>
               </div>
             </aside>
+          </div>
+        </div>
+      </section>
+
+      <section id="counterparty-pack" className="section">
+        <div className="container">
+          <div className="section-head">
+            <div className="left">
+              <div className="eyebrow">{t("packEyebrow")}</div>
+              <h2 className="display display-md">{t("packH2")}</h2>
+            </div>
+            <div className="right">
+              <p className="editorial">{t("packLede")}</p>
+            </div>
+          </div>
+          <div style={{ maxWidth: 760, marginTop: 32 }}>
+            <CounterpartyPackForm />
           </div>
         </div>
       </section>

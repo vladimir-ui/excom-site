@@ -72,9 +72,20 @@
     "phaseSettlementMetaKey": "Pricing",
     "phaseSettlementMetaValue": "Fix · spot · OCO · stop · limit",
 
-    "dossierEyebrow": "Dossier de operaciones",
-    "dossierH2": "Lotes procesados, throughput, tiempos de la ventana de fijación.",
-    "dossierEditorial": "Un único panel que resume el registro operativo del año en curso 2026. Cifras tabulares en todo el dossier. Referencia las convenciones del fix AM/PM de LBMA para los tiempos de la ventana.",
+    "disclosureEyebrow": "Registro operativo",
+    "disclosureH2": "Control de posiciones, divulgado bajo NDA.",
+    "disclosureLede": "ExCom no publica cifras operativas a nivel de lote en esta superficie. Las contrapartes reciben el registro operativo a través de los canales indicados — estructurado para ciclos de diligencia debida, calibrado a estándar de auditoría.",
+    "disclosureCard1Eyebrow": "01 · Qué se mide",
+    "disclosureCard1Heading": "Por lote, sobre la plataforma",
+    "disclosureCard1Body": "Lotes procesados, peso bruto Au y Ag, ley promedio, porcentaje de retorno, tiempo de despegue al fix, SLA de cámara y liquidación. Capturado a nivel de lote sobre ExCom Trading Platform; reconciliado contra la documentación del productor, la refinería y la aseguradora.",
+    "disclosureCard2Eyebrow": "02 · Cómo se verifica",
+    "disclosureCard2Heading": "Anualmente, por KPMG Malta",
+    "disclosureCard2Body": "Estados financieros anuales auditados por KPMG Malta. Auditorías operativas y de cumplimiento encomendadas de forma independiente. Hallazgos reportados al consejo y disponibles para contrapartes cualificadas bajo NDA.",
+    "disclosureCard3Eyebrow": "03 · Cómo acceder",
+    "disclosureCard3Heading": "Counterparty Pack, bajo NDA",
+    "disclosureCard3Body": "El registro operativo trimestral, los estados financieros auditados y las distribuciones de ley y retorno a nivel de lote se divulgan en el Counterparty Pack — emitido bajo NDA durante el onboarding. Las jurisdicciones operativas y la red activa de contrapartes se divulgan por el mismo canal.",
+    "disclosureCtaLabel": "Solicitar Counterparty Pack →",
+    "disclosureFooter": "Registro operativo retenido en ExCom Trading Platform · auditado anualmente · divulgado bajo NDA",
 
     "complianceEyebrow": "Postura de cumplimiento",
     "complianceH2": "Postura, no posturismo.",
@@ -92,5 +103,24 @@
     "voiceEyebrow": "Voz",
     "voiceLead": "ExCom no se promociona ante audiencias retail. La entidad habla con refinerías, productores, bancos, contrapartes de cobertura y auditores.",
     "voiceEm": "El doré termina convirtiéndose en lingote — el estado final de la cadena se reconoce, no se persigue."
+  },
+  "contact": {
+    "packEyebrow": "Counterparty pack",
+    "packH2": "Solicitud del pack",
+    "packLede": "Envíe el formulario para iniciar el onboarding de contraparte. La ejecución de NDA es requisito previo a la entrega del Counterparty Pack. info@ex-com.org permanece disponible como canal alternativo.",
+    "packFieldName": "Nombre",
+    "packFieldEntity": "Entidad",
+    "packFieldRole": "Cargo",
+    "packFieldJurisdiction": "Jurisdicción",
+    "packFieldType": "Tipo de contraparte",
+    "packFieldEmail": "Correo",
+    "packTypeProducer": "Productor",
+    "packTypeRefinery": "Refinería",
+    "packTypeBank": "Banco",
+    "packTypeHedging": "Cobertura",
+    "packTypeOther": "Otro",
+    "packNdaCheck": "Confirmo que se ejecutará un NDA antes de la entrega del Counterparty Pack.",
+    "packSubmit": "Abrir solicitud →",
+    "packNote": "Abre su cliente de correo. La ejecución de NDA condiciona la entrega del pack."
   }
 }

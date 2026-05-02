@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import GlobeBridge from "../components/Globe";
-import Dossier from "../components/Dossier";
+import { Link } from "../../i18n/navigation";
 
 export default async function HomePage({
   params,
@@ -18,7 +18,7 @@ export default async function HomePage({
       <Bridge />
       <DorePlate />
       <OperationsSummary />
-      <DossierSection />
+      <DisclosureSection />
       <ComplianceBlock />
       <GroupContext />
     </main>
@@ -241,7 +241,7 @@ function OperationsSummary() {
   );
 }
 
-function DossierSection() {
+function DisclosureSection() {
   const t = useTranslations("home");
   return (
     <section
@@ -251,14 +251,51 @@ function DossierSection() {
       <div className="container">
         <div className="section-head" style={{ marginBottom: 40 }}>
           <div className="left">
-            <div className="eyebrow">{t("dossierEyebrow")}</div>
-            <h2 className="display display-md">{t("dossierH2")}</h2>
+            <div className="eyebrow">{t("disclosureEyebrow")}</div>
+            <h2 className="display display-md">{t("disclosureH2")}</h2>
           </div>
           <div className="right">
-            <p className="editorial">{t("dossierEditorial")}</p>
+            <p className="editorial">{t("disclosureLede")}</p>
           </div>
         </div>
-        <Dossier />
+
+        <div className="disclosure-grid">
+          {[1, 2, 3].map((n) => (
+            <div key={n} className="item">
+              <div className="num">
+                {t(
+                  `disclosureCard${n}Eyebrow` as
+                    | "disclosureCard1Eyebrow"
+                    | "disclosureCard2Eyebrow"
+                    | "disclosureCard3Eyebrow",
+                )}
+              </div>
+              <h3>
+                {t(
+                  `disclosureCard${n}Heading` as
+                    | "disclosureCard1Heading"
+                    | "disclosureCard2Heading"
+                    | "disclosureCard3Heading",
+                )}
+              </h3>
+              <p>
+                {t(
+                  `disclosureCard${n}Body` as
+                    | "disclosureCard1Body"
+                    | "disclosureCard2Body"
+                    | "disclosureCard3Body",
+                )}
+              </p>
+              {n === 3 && (
+                <Link href="/contact#counterparty-pack" className="cta">
+                  {t("disclosureCtaLabel")}
+                </Link>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="disclosure-footer">{t("disclosureFooter")}</div>
       </div>
     </section>
   );
