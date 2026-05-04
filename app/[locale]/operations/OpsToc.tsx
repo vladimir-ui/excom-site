@@ -1,22 +1,47 @@
 "use client";
 
 import { useEffect, useState, type MouseEvent } from "react";
+import { useTranslations } from "next-intl";
 
-const TOC_ITEMS = [
-  { id: "sourcing", num: "01", icon: "/assets/icon-sourcing.png", label: "Sourcing" },
-  { id: "logistics", num: "02", icon: "/assets/icon-logistics.png", label: "Logistics" },
-  { id: "refining", num: "03", icon: "/assets/icon-refining.png", label: "Refining" },
-  { id: "settlement", num: "04", icon: "/assets/icon-settlement.png", label: "Settlement" },
-];
+type TocId = "sourcing" | "logistics" | "refining" | "settlement";
+
+const TOC_ITEMS: { id: TocId; num: string; icon: string; titleKey: string }[] =
+  [
+    {
+      id: "sourcing",
+      num: "01",
+      icon: "/assets/icon-sourcing.png",
+      titleKey: "phaseSourcingTitle",
+    },
+    {
+      id: "logistics",
+      num: "02",
+      icon: "/assets/icon-logistics.png",
+      titleKey: "phaseLogisticsTitle",
+    },
+    {
+      id: "refining",
+      num: "03",
+      icon: "/assets/icon-refining.png",
+      titleKey: "phaseRefiningTitle",
+    },
+    {
+      id: "settlement",
+      num: "04",
+      icon: "/assets/icon-settlement.png",
+      titleKey: "phaseSettlementTitle",
+    },
+  ];
 
 export default function OpsToc() {
-  const [active, setActive] = useState("sourcing");
+  const t = useTranslations("operations");
+  const [active, setActive] = useState<TocId>("sourcing");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting) setActive(e.target.id);
+          if (e.isIntersecting) setActive(e.target.id as TocId);
         });
       },
       { rootMargin: "-30% 0px -55% 0px", threshold: 0 },
@@ -38,8 +63,8 @@ export default function OpsToc() {
   };
 
   return (
-    <aside className="ops-toc" aria-label="Phase index">
-      <div className="label">Lifecycle index</div>
+    <aside className="ops-toc" aria-label={t("tocLabel")}>
+      <div className="label">{t("tocLabel")}</div>
       <ol className="lifecycle-index">
         {TOC_ITEMS.map((item) => (
           <li key={item.id}>
@@ -56,7 +81,15 @@ export default function OpsToc() {
                 alt=""
                 aria-hidden="true"
               />
-              <span className="lbl">{item.label}</span>
+              <span className="lbl">
+                {t(
+                  item.titleKey as
+                    | "phaseSourcingTitle"
+                    | "phaseLogisticsTitle"
+                    | "phaseRefiningTitle"
+                    | "phaseSettlementTitle",
+                )}
+              </span>
             </a>
           </li>
         ))}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useTranslations } from "next-intl";
 
 type CategoryId =
   | "producer"
@@ -10,60 +11,73 @@ type CategoryId =
   | "press"
   | "general";
 
-type Category = {
+type CategoryKey =
+  | "catProducerLabel"
+  | "catProducerDesc"
+  | "catRefineryLabel"
+  | "catRefineryDesc"
+  | "catAdvisoryLabel"
+  | "catAdvisoryDesc"
+  | "catComplianceLabel"
+  | "catComplianceDesc"
+  | "catPressLabel"
+  | "catPressDesc"
+  | "catGeneralLabel"
+  | "catGeneralDesc";
+
+const CATEGORIES: {
   id: CategoryId;
-  label: string;
-  desc: string;
+  labelKey: CategoryKey;
+  descKey: CategoryKey;
   to: string;
   subj: string;
-};
-
-const INTAKE_CATEGORIES: Category[] = [
+}[] = [
   {
     id: "producer",
-    label: "Producer intake",
-    desc: "Origin, material profile, offtake enquiry.",
+    labelKey: "catProducerLabel",
+    descKey: "catProducerDesc",
     to: "info@ex-com.org",
     subj: "Producer intake",
   },
   {
     id: "refinery",
-    label: "Refinery counterparty",
-    desc: "Refining capacity dialogue or counterparty onboarding.",
+    labelKey: "catRefineryLabel",
+    descKey: "catRefineryDesc",
     to: "info@ex-com.org",
     subj: "Refinery counterparty enquiry",
   },
   {
     id: "advisory",
-    label: "Advisory scoping",
-    desc: "Producer advisory engagement — scoping call.",
+    labelKey: "catAdvisoryLabel",
+    descKey: "catAdvisoryDesc",
     to: "info@ex-com.org",
     subj: "Advisory scoping — producer intake",
   },
   {
     id: "compliance",
-    label: "Compliance / audit",
-    desc: "Compliance documentation, KYC, audit-related enquiries.",
+    labelKey: "catComplianceLabel",
+    descKey: "catComplianceDesc",
     to: "info@ex-com.org",
     subj: "Compliance documentation request",
   },
   {
     id: "press",
-    label: "Press / media",
-    desc: "Media enquiries and corporate communications.",
+    labelKey: "catPressLabel",
+    descKey: "catPressDesc",
     to: "info@ex-com.org",
     subj: "Press enquiry",
   },
   {
     id: "general",
-    label: "General",
-    desc: "Anything else.",
+    labelKey: "catGeneralLabel",
+    descKey: "catGeneralDesc",
     to: "info@ex-com.org",
     subj: "General enquiry",
   },
 ];
 
 export default function ContactForm() {
+  const t = useTranslations("contactForm");
   const [cat, setCat] = useState<CategoryId>("producer");
   const [name, setName] = useState("");
   const [firm, setFirm] = useState("");
@@ -71,8 +85,7 @@ export default function ContactForm() {
   const [msg, setMsg] = useState("");
   const [nda, setNda] = useState(false);
 
-  const active =
-    INTAKE_CATEGORIES.find((c) => c.id === cat) ?? INTAKE_CATEGORIES[0];
+  const active = CATEGORIES.find((c) => c.id === cat) ?? CATEGORIES[0];
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -80,7 +93,7 @@ export default function ContactForm() {
       `Name: ${name}`,
       `Firm: ${firm}`,
       `Role: ${role}`,
-      `Category: ${active.label}`,
+      `Category: ${t(active.labelKey)}`,
       nda ? "NDA acknowledged: yes" : "",
       "",
       msg,
@@ -95,22 +108,20 @@ export default function ContactForm() {
 
   return (
     <div className="contact-form-block">
-      <div className="eyebrow">Intake</div>
-      <h2 className="display display-md">Route the enquiry.</h2>
+      <div className="eyebrow">{t("intakeEyebrow")}</div>
+      <h2 className="display display-md">{t("intakeH2")}</h2>
       <p
         className="editorial"
         style={{ marginTop: "0.75rem", marginBottom: "2rem" }}
       >
-        Select the appropriate desk. Submission opens an email draft
-        addressed to the correct routing — no information is transmitted to
-        ExCom servers from this page.
+        {t("intakeLede")}
       </p>
 
       <form className="contact-form" onSubmit={handleSubmit}>
         <fieldset className="cat-fieldset">
-          <legend>Desk</legend>
+          <legend>{t("deskLegend")}</legend>
           <div className="cat-grid">
-            {INTAKE_CATEGORIES.map((c) => (
+            {CATEGORIES.map((c) => (
               <label
                 key={c.id}
                 className={`cat-card ${cat === c.id ? "active" : ""}`}
@@ -122,8 +133,8 @@ export default function ContactForm() {
                   checked={cat === c.id}
                   onChange={() => setCat(c.id)}
                 />
-                <span className="cat-label">{c.label}</span>
-                <span className="cat-desc">{c.desc}</span>
+                <span className="cat-label">{t(c.labelKey)}</span>
+                <span className="cat-desc">{t(c.descKey)}</span>
               </label>
             ))}
           </div>
@@ -131,7 +142,7 @@ export default function ContactForm() {
 
         <div className="field-row">
           <label className="field">
-            <span className="lbl">Name</span>
+            <span className="lbl">{t("fieldName")}</span>
             <input
               type="text"
               value={name}
@@ -140,7 +151,7 @@ export default function ContactForm() {
             />
           </label>
           <label className="field">
-            <span className="lbl">Firm</span>
+            <span className="lbl">{t("fieldFirm")}</span>
             <input
               type="text"
               value={firm}
@@ -151,7 +162,7 @@ export default function ContactForm() {
         </div>
 
         <label className="field">
-          <span className="lbl">Role</span>
+          <span className="lbl">{t("fieldRole")}</span>
           <input
             type="text"
             value={role}
@@ -160,12 +171,12 @@ export default function ContactForm() {
         </label>
 
         <label className="field">
-          <span className="lbl">Message</span>
+          <span className="lbl">{t("fieldMessage")}</span>
           <textarea
             rows={6}
             value={msg}
             onChange={(e) => setMsg(e.target.value)}
-            placeholder="Concise; ExCom will follow up to schedule."
+            placeholder={t("messagePlaceholder")}
             required
           />
         </label>
@@ -176,20 +187,14 @@ export default function ContactForm() {
             checked={nda}
             onChange={(e) => setNda(e.target.checked)}
           />
-          <span>
-            I acknowledge that any sensitive material will be exchanged under
-            written NDA before substantive engagement.
-          </span>
+          <span>{t("ndaCheck")}</span>
         </label>
 
         <div className="form-actions">
           <button type="submit" className="cta">
-            Open enquiry →
+            {t("submit")}
           </button>
-          <span className="form-note">
-            Opens your mail client. No data leaves your machine until you
-            send.
-          </span>
+          <span className="form-note">{t("formNote")}</span>
         </div>
       </form>
     </div>

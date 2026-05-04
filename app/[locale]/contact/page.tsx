@@ -1,15 +1,22 @@
 /* eslint-disable react/no-unescaped-entities */
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
 import ContactForm from "./ContactForm";
 import CounterpartyPackForm from "./CounterpartyPackForm";
 
-export const metadata: Metadata = {
-  title: "Contact — ExCom",
-  description:
-    "Counterparty enquiries, compliance documentation requests, and press contact for ExCom Limited.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "contact" });
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+  };
+}
 
 export default async function ContactPage({
   params,
@@ -27,14 +34,9 @@ function ContactPageInner() {
     <main>
       <section className="page-hero">
         <div className="container">
-          <div className="crumbs">Home · Contact</div>
-          <h1>Contact.</h1>
-          <p className="lede">
-            ExCom is reachable through a single email address and a single
-            office. Substantive enquiries are routed to the relevant function
-            via the intake form below; the choice of category determines
-            which desk receives the message.
-          </p>
+          <div className="crumbs">{t("heroCrumbs")}</div>
+          <h1>{t("heroH1")}</h1>
+          <p className="lede">{t("heroLede")}</p>
         </div>
       </section>
 
@@ -45,21 +47,21 @@ function ContactPageInner() {
 
             <aside className="contact-aside">
               <div className="aside-block">
-                <div className="eyebrow">Switchboard</div>
-                <h3 className="aside-h">Direct channels</h3>
+                <div className="eyebrow">{t("asideSwitchboardEyebrow")}</div>
+                <h3 className="aside-h">{t("asideSwitchboardH3")}</h3>
                 <dl className="direct-dl">
-                  <dt>Email</dt>
+                  <dt>{t("asideSwitchboardEmail")}</dt>
                   <dd>
                     <a href="mailto:info@ex-com.org">info@ex-com.org</a>
                   </dd>
-                  <dt>Web</dt>
+                  <dt>{t("asideSwitchboardWeb")}</dt>
                   <dd>www.ex-com.org</dd>
                 </dl>
               </div>
 
               <div className="aside-block">
-                <div className="eyebrow">Registered office</div>
-                <h3 className="aside-h">Birkirkara, Malta</h3>
+                <div className="eyebrow">{t("asideOfficeEyebrow")}</div>
+                <h3 className="aside-h">{t("asideOfficeH3")}</h3>
                 <address className="office-addr">
                   ExCom Limited
                   <br />
@@ -70,27 +72,27 @@ function ContactPageInner() {
                   Malta
                 </address>
                 <dl className="office-dl">
-                  <dt>Function</dt>
-                  <dd>Statutory seat. Audit, board, statutory filings.</dd>
-                  <dt>Visits</dt>
-                  <dd>By prior appointment only.</dd>
+                  <dt>{t("asideOfficeFunction")}</dt>
+                  <dd>{t("asideOfficeFunctionVal")}</dd>
+                  <dt>{t("asideOfficeVisits")}</dt>
+                  <dd>{t("asideOfficeVisitsVal")}</dd>
                 </dl>
               </div>
 
               <div className="aside-block">
-                <div className="eyebrow">Statutory</div>
-                <h3 className="aside-h">Entity</h3>
+                <div className="eyebrow">{t("asideStatutoryEyebrow")}</div>
+                <h3 className="aside-h">{t("asideStatutoryH3")}</h3>
                 <dl className="office-dl">
-                  <dt>Legal name</dt>
+                  <dt>{t("asideStatutoryLegalName")}</dt>
                   <dd>ExCom Limited</dd>
-                  <dt>Company no.</dt>
+                  <dt>{t("asideStatutoryCompanyNo")}</dt>
                   <dd className="mono">C 112080</dd>
-                  <dt>VAT</dt>
+                  <dt>{t("asideStatutoryVat")}</dt>
                   <dd className="mono">MT31936814</dd>
-                  <dt>Incorporated</dt>
-                  <dd>21 May 2025</dd>
-                  <dt>Auditor</dt>
-                  <dd>KPMG (Malta)</dd>
+                  <dt>{t("asideStatutoryIncorporated")}</dt>
+                  <dd>{t("asideStatutoryIncorporatedVal")}</dd>
+                  <dt>{t("asideStatutoryAuditor")}</dt>
+                  <dd>{t("asideStatutoryAuditorVal")}</dd>
                 </dl>
               </div>
             </aside>
@@ -122,17 +124,11 @@ function ContactPageInner() {
         <div className="container">
           <div className="section-head">
             <div className="left">
-              <div className="eyebrow">Operational hubs</div>
-              <h2 className="display display-md">Three desks, one entity.</h2>
+              <div className="eyebrow">{t("hubsEyebrow")}</div>
+              <h2 className="display display-md">{t("hubsH2")}</h2>
             </div>
             <div className="right">
-              <p className="editorial">
-                ExCom is registered in Malta and runs day-to-day operations
-                from three coordinated desks: Malta, Sofia, and Lima. The
-                hubs are not separate entities — they are functional
-                placements of a single ExCom desk, calibrated to where
-                origin, transit, and counterparty engagement actually happen.
-              </p>
+              <p className="editorial">{t("hubsLede")}</p>
             </div>
           </div>
 
@@ -142,34 +138,29 @@ function ContactPageInner() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/assets/photo-hub-malta.jpg"
-                  alt="Maltese baroque parish church facade in Birkirkara, two bell towers and a central pediment in honey-coloured limestone against a cloudscape."
+                  alt=""
                   loading="lazy"
                 />
               </div>
               <div className="hub-tag">Hub 01</div>
               <h3>Malta</h3>
-              <div className="hub-sub">Statutory seat · EU regulatory base</div>
-              <p>
-                The registered office and the statutory home of the trading
-                book. Board, audit, and AML/CFT supervisory engagement run
-                from Malta. The EU regulatory perimeter governs the entire
-                enterprise from this seat.
-              </p>
+              <div className="hub-sub">{t("hubMaltaSub")}</div>
+              <p>{t("hubMaltaBody")}</p>
               <dl className="hub-dl">
-                <dt>Address</dt>
+                <dt>{t("hubAddressLabel")}</dt>
                 <dd>
                   BKR 4013
                   <br />
                   Birkirkara, Malta
                 </dd>
-                <dt>Hours</dt>
+                <dt>{t("hubHoursLabel")}</dt>
                 <dd>
                   Mon&nbsp;–&nbsp;Fri
                   <br />
                   09:00 – 17:30 CET
                 </dd>
-                <dt>Function</dt>
-                <dd>Registered office · audit · statutory</dd>
+                <dt>{t("hubFunctionLabel")}</dt>
+                <dd>{t("hubMaltaFunctionVal")}</dd>
               </dl>
             </article>
 
@@ -178,30 +169,25 @@ function ContactPageInner() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/assets/photo-hub-sofia.jpg"
-                  alt="Largo government complex in central Sofia at dusk — the former Party House flanked by the Council of Ministers and Presidency, with a glass dome over the ancient Serdica ruins in the foreground."
+                  alt=""
                   loading="lazy"
                 />
               </div>
               <div className="hub-tag">Hub 02</div>
               <h3>Sofia</h3>
-              <div className="hub-sub">European trading desk · Bulgaria</div>
-              <p>
-                The European trading desk and operational headquarters for
-                day-to-day execution. Counterparty management, transit
-                logistics, and refinery liaison across the European and
-                Eurasian corridors are coordinated from Sofia.
-              </p>
+              <div className="hub-sub">{t("hubSofiaSub")}</div>
+              <p>{t("hubSofiaBody")}</p>
               <dl className="hub-dl">
-                <dt>Region</dt>
-                <dd>Sofia, Bulgaria</dd>
-                <dt>Hours</dt>
+                <dt>{t("hubRegionLabel")}</dt>
+                <dd>{t("hubSofiaRegionVal")}</dd>
+                <dt>{t("hubHoursLabel")}</dt>
                 <dd>
                   Mon&nbsp;–&nbsp;Fri
                   <br />
                   09:00 – 18:00 EET
                 </dd>
-                <dt>Function</dt>
-                <dd>European trading desk · operations</dd>
+                <dt>{t("hubFunctionLabel")}</dt>
+                <dd>{t("hubSofiaFunctionVal")}</dd>
               </dl>
             </article>
 
@@ -210,30 +196,25 @@ function ContactPageInner() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/assets/photo-hub-lima.jpg"
-                  alt="Aerial view of the Lima coastline along the Costa Verde, with the city built atop seaside cliffs above the Pacific."
+                  alt=""
                   loading="lazy"
                 />
               </div>
               <div className="hub-tag">Hub 03</div>
               <h3>Lima</h3>
-              <div className="hub-sub">LATAM origin desk · Peru</div>
-              <p>
-                The Latin America origin desk. Sourcing engagement with
-                producers across the Andean precious-metals belt, mill-gate
-                diligence, and the first leg of secured logistics out of
-                origin are coordinated from Lima.
-              </p>
+              <div className="hub-sub">{t("hubLimaSub")}</div>
+              <p>{t("hubLimaBody")}</p>
               <dl className="hub-dl">
-                <dt>Region</dt>
-                <dd>Lima, Peru</dd>
-                <dt>Hours</dt>
+                <dt>{t("hubRegionLabel")}</dt>
+                <dd>{t("hubLimaRegionVal")}</dd>
+                <dt>{t("hubHoursLabel")}</dt>
                 <dd>
                   Mon&nbsp;–&nbsp;Fri
                   <br />
                   08:30 – 17:30 PET
                 </dd>
-                <dt>Function</dt>
-                <dd>LATAM origin desk · producer engagement</dd>
+                <dt>{t("hubFunctionLabel")}</dt>
+                <dd>{t("hubLimaFunctionVal")}</dd>
               </dl>
             </article>
           </div>
@@ -244,41 +225,25 @@ function ContactPageInner() {
         <div className="container">
           <div className="response-grid">
             <div className="left">
-              <div className="eyebrow">Response</div>
-              <h2 className="display display-md">What to expect.</h2>
-              <p className="editorial">
-                Enquiries are reviewed on a desk basis and acknowledged in
-                writing. Below are indicative response times — these are
-                operating norms, not service-level commitments.
-              </p>
+              <div className="eyebrow">{t("responseEyebrow")}</div>
+              <h2 className="display display-md">{t("responseH2")}</h2>
+              <p className="editorial">{t("responseLede")}</p>
             </div>
             <div className="response-cards">
               <div className="r-card">
-                <div className="r-cadence">Within 5 working days</div>
-                <div className="r-channels">Producer · Refinery · Advisory</div>
-                <p>
-                  Substantive enquiries are routed to the relevant trading or
-                  advisory desk for written acknowledgement and a proposed
-                  scoping call.
-                </p>
+                <div className="r-cadence">{t("responseCard1Cadence")}</div>
+                <div className="r-channels">{t("responseCard1Channels")}</div>
+                <p>{t("responseCard1Body")}</p>
               </div>
               <div className="r-card">
-                <div className="r-cadence">Within 10 working days</div>
-                <div className="r-channels">Compliance · Audit</div>
-                <p>
-                  Compliance documentation requests are released under
-                  written engagement; counterparty packets follow a defined
-                  release protocol.
-                </p>
+                <div className="r-cadence">{t("responseCard2Cadence")}</div>
+                <div className="r-channels">{t("responseCard2Channels")}</div>
+                <p>{t("responseCard2Body")}</p>
               </div>
               <div className="r-card">
-                <div className="r-cadence">Same week</div>
-                <div className="r-channels">Press · Media</div>
-                <p>
-                  Press enquiries reach corporate communications directly and
-                  are answered within the publication's working window where
-                  feasible.
-                </p>
+                <div className="r-cadence">{t("responseCard3Cadence")}</div>
+                <div className="r-channels">{t("responseCard3Channels")}</div>
+                <p>{t("responseCard3Body")}</p>
               </div>
             </div>
           </div>

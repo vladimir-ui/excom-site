@@ -1,23 +1,18 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "Not found — ExCom",
-};
+import { useTranslations } from "next-intl";
+import { Link } from "../../i18n/navigation";
 
 export default function NotFound() {
+  const t = useTranslations("notFound");
   return (
     <main>
       <section className="page-hero">
         <div className="container">
-          <div className="crumbs">404</div>
-          <h1>Not found.</h1>
-          <p className="lede">
-            The page you requested does not exist or has been moved.
-          </p>
+          <div className="crumbs">{t("crumbs")}</div>
+          <h1>{t("h1")}</h1>
+          <p className="lede">{t("lede")}</p>
           <p style={{ marginTop: 24 }}>
             <Link href="/" className="cta">
-              Return to home →
+              {t("cta")}
             </Link>
           </p>
         </div>
